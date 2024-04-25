@@ -1,0 +1,65 @@
+#!/bin/bash
+
+### steps ####
+# Verify the system has a cuda-capable gpu
+# Download and install the nvidia cuda toolkit and cudnn
+# Setup environmental variables
+# Verify the installation
+###
+
+### to verify your gpu is cuda enable check
+lspci | grep -i nvidia
+
+### If you have previous installation remove it first. 
+sudo apt-get purge nvidia*
+sudo apt remove nvidia-*
+sudo rm /etc/apt/sources.list.d/cuda*
+sudo apt-get autoremove && sudo apt-get autoclean
+sudo rm -rf /usr/local/cuda*
+
+# system update
+sudo apt-get update
+sudo apt-get upgrade
+
+# install other import packages
+sudo apt-get install g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
+
+# first get the PPA repository driver
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+
+# install nvidia driver with dependencies
+sudo apt install libnvidia-common-470
+sudo apt install libnvidia-gl-470
+sudo apt install nvidia-driver-470
+
+ # installing CUDA-11.8
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda
+
+# setup your paths
+echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+sudo ldconfig
+
+# install cuDNN v8.9.7
+# First register here: https://developer.nvidia.com/developer-program/signup
+
+CUDNN_TAR_FILE="cudnn-linux-x86_64-8.9.7.29_cuda11-archive.tar.xz"
+wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.9.7/local_installers/11.x/cudnn-linux-x86_64-8.9.7.29_cuda11-archive.tar.xz
+tar -xvf ${CUDNN_TAR_FILE}
+
+# copy the following files into the cuda toolkit directory.
+sudo cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include 
+$ sudo cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 
+$ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+
+# Finally, to verify the installation, check
+nvidia-smi
+nvcc -V
+
+# install Pytorch (an open source machine learning framework)
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
