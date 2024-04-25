@@ -18,32 +18,32 @@ sudo apt-get autoremove && sudo apt-get autoclean
 sudo rm -rf /usr/local/cuda*```
 
 # system update
-``sudo apt-get update
-sudo apt-get upgrade``
+```sudo apt-get update
+sudo apt-get upgrade```
 
 # install other import packages
-sudo apt-get install g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
+```sudo apt-get install g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev```
 
 # first get the PPA repository driver
-sudo add-apt-repository ppa:graphics-drivers/ppa
-sudo apt update
+```sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update```
 
 # install nvidia driver with dependencies
-sudo apt install libnvidia-common-470
+```sudo apt install libnvidia-common-470
 sudo apt install libnvidia-gl-470
-sudo apt install nvidia-driver-470
+sudo apt install nvidia-driver-470```
 
  # installing CUDA-11.8
-wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb
+```wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.0-1_all.deb
 sudo dpkg -i cuda-keyring_1.0-1_all.deb
 sudo apt-get update
-sudo apt-get -y install cuda
+sudo apt-get -y install cuda```
 
 # setup your paths
-echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bashrc
+```echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bashrc
 echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 source ~/.bashrc
-sudo ldconfig
+sudo ldconfig```
 
 # install cuDNN v8.9.7
 # First register here: https://developer.nvidia.com/developer-program/signup
