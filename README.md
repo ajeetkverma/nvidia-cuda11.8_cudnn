@@ -15,7 +15,7 @@
 sudo apt remove nvidia-*
 sudo rm /etc/apt/sources.list.d/cuda*
 sudo apt-get autoremove && sudo apt-get autoclean
-sudo rm -rf /usr/local/cuda*```
+sudo rm -rf /usr/local/cuda*
 
 # system update
 ```sudo apt-get update
@@ -62,4 +62,4 @@ nvidia-smi
 nvcc -V
 
 # install Pytorch (an open source machine learning framework)
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118```
