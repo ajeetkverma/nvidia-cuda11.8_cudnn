@@ -1,4 +1,4 @@
-# NVIDIA GPU drivers and cooda toolkit installation instructions. (this installs cuda 11.8 and compatible CuDNN libraries to accelerate deep learning
+# NVIDIA GPU drivers and CUDA toolkit installation instructions. (this installs cuda 11.8 and compatible CuDNN libraries to accelerate deep learning
 
 # nvidia-gpu drivers
 
